@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Conciliación Bancaria{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
+        {% endblock %}
+
+        {% block javascripts %}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% endblock %}
+    </head>
+    <body class="flex flex-col min-h-screen bg-gray-100">
+        <!-- Header -->
+        <header class="bg-blue-800 text-white p-4 shadow-lg">
+            <div class="container mx-auto flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <h1 class="text-xl font-semibold">Conciliación Bancaria</h1>
+                </div>
+                <nav class="flex items-center space-x-4">
+                    <a href="#" class="hover:underline">Inicio</a>
+                    <a href="#" class="hover:underline">Servicios</a>
+                    <a href="#" class="hover:underline">Contacto</a>
+                    {% if login %}
+                    <div class="relative">
+                        <button class="flex items-center focus:outline-none" id="user-menu">
+                            <span>Diego</span>
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="hidden absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg" id="user-menu-items">
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-200">Perfil</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-200">Configuración</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-200">Cerrar Sesión</a>
+                        </div>
+                    </div>
+                {% else %}
+                    <a href="#" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Iniciar Sesión</a>
+                {% endif %}
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-grow container mx-auto p-4 content-center">
+            {% block body %}{% endblock %}
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-blue-800 text-white p-6 mt-8">
+            <div class="container mx-auto flex justify-center items-center">
+                <div>
+                    <p>&copy; 2024 Conciliación Bancaria. Todos los derechos reservados.</p>
+                    <div class="flex space-x-4 mt-2 justify-center">
+                        <a href="#" class="hover:underline">Aviso Legal</a>
+                        <a href="#" class="hover:underline">Política de Privacidad</a>
+                        <a href="#" class="hover:underline">Términos de Servicio</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Tailwind CSS Script -->
+        <script>
+            document.getElementById('user-menu').addEventListener('click', function() {
+                const menuItems = document.getElementById('user-menu-items');
+                menuItems.classList.toggle('hidden');
+            });
+        </script>
+
+    </body>
+</html>
