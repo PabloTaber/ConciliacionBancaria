@@ -9,7 +9,10 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello Diego! ✅</h1>
+
+    {% if is_authenticated %}
+        <h1>Hello {{ user.firstName }}! ✅</h1>
+    {% endif %}
 
     This friendly message is coming from:
     <ul>

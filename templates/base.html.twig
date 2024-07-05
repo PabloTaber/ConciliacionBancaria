@@ -25,23 +25,23 @@
                     <a href="{{ path('app_homepage')}}" class="hover:underline">Inicio</a>
                     <a href="#" class="hover:underline">Servicios</a>
                     <a href="#" class="hover:underline">Contacto</a>
-                    {% if login %}
-                    <div class="relative">
-                        <button class="flex items-center focus:outline-none" id="user-menu">
-                            <span>Diego</span>
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="hidden absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg" id="user-menu-items">
-                            <a href="#" class="block px-4 py-2 hover:bg-gray-200">Perfil</a>
-                            <a href="#" class="block px-4 py-2 hover:bg-gray-200">Configuración</a>
-                            <a href="#" class="block px-4 py-2 hover:bg-gray-200">Cerrar Sesión</a>
+                    {% if is_authenticated %}
+                        <div class="relative">
+                            <button class="flex items-center focus:outline-none" id="user-menu">
+                                <span>{{ user.firstName }}</span>
+                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div class="hidden absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg" id="user-menu-items">
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-200">Perfil</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-200">Configuración</a>
+                                <a href="{{ path('app_logout') }}" class="block px-4 py-2 hover:bg-gray-200">Cerrar Sesión</a>
+                            </div>
                         </div>
-                    </div>
-                {% else %}
-                    <a href="{{ path('app_login') }}" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Iniciar Sesión</a>
-                {% endif %}
+                    {% else %}
+                        <a href="{{ path('app_login') }}" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Iniciar Sesión</a>
+                    {% endif %}
                 </nav>
             </div>
         </header>
@@ -69,6 +69,13 @@
         <script>
             document.getElementById('user-menu').addEventListener('click', function() {
                 const menuItems = document.getElementById('user-menu-items');
+                menuItems.classList.toggle('hidden');
+            });
+        </script>
+
+    </body>
+</html>
+               const menuItems = document.getElementById('user-menu-items');
                 menuItems.classList.toggle('hidden');
             });
         </script>
